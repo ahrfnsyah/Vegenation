@@ -80,6 +80,10 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   text-decoration: none;
   transition: transform 0.2s ease, background-color 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ctaButton:hover {
