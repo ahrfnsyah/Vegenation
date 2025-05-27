@@ -1,0 +1,171 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 960px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.teamTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  margin-bottom: 2rem;
+}
+
+.teamCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.teamCard:hover {
+  transform: translateY(-5px);
+}
+
+.profileImage {
+  border-radius: 999px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.teamCard h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  color: black;
+}
+
+.teamCard p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+}
+
+.socialIcons a {
+  margin: 0 0.4rem;
+  color: #3D8D7A;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.socialIcons a:hover {
+  color: #2f6e5f;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 1001;
+}
+
+.closeIcon:hover {
+  color: #3D8D7A;
+}
+
+
+@media screen and (max-width: 768px) {
+  .modalOverlay {
+    padding: 1rem;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .modalContent {
+    margin-top: 4rem;
+    border-radius: 12px;
+  }
+
+  .teamTitle {
+    font-size: 1.6rem;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    justify-items: stretch;
+  }
+
+  .teamCard {
+    padding: 1.2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  .profileImage {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .teamCard h4 {
+    font-size: 1rem;
+    margin: 0.5rem 0 0.2rem;
+  }
+
+  .teamCard p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+  }
+
+  .socialIcons {
+    margin-top: auto;
+  }
+
+  .socialIcons a {
+    font-size: 1rem;
+    margin: 0 0.4rem;
+  }
+
+   .closeIcon {
+    top: 0.8rem;
+    right: 0.8rem;
+    font-size: 1.3rem;
+    padding-bottom: 1rem;
+  }
+
+  .closeButton {
+    display: none; /* Pastikan tombol lama tidak muncul di mobile */
+  }
+}

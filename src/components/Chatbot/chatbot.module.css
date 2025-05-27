@@ -1,0 +1,146 @@
+/* Chatbot */
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  background-color: #fff;
+  position: relative;
+}
+
+.chatMessages {
+ flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.helpText {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  animation: fadeIn 0.5s ease;
+  font-family: poppins;
+}
+
+/* Modern Chat Bubble */
+.userMessageWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+  font-family: poppins;
+}
+
+.botMessageWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.userMessage {
+  align-self: flex-end;
+  background-color: #999;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 12px 12px 0 12px;
+  max-width: 70%;
+  font-size: 14px;
+}
+
+.botAvatar {
+  background: transparent;
+}
+
+/* User bubble */
+.userMessage {
+  background-color: #3D8D7A;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 16px 16px 0 16px;
+  max-width: 70%;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  white-space: pre-line;
+}
+
+/* Bot bubble */
+.botMessage {
+  background-color: #f1f1f1;
+  color: black;
+  padding: 10px 14px;
+  border-radius: 16px 16px 16px 0;
+  max-width: 70%;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: poppins;
+  white-space: pre-line;
+}
+
+.chatInputArea {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: white;
+
+  /* Tetap di bawah */
+  position: sticky;
+  bottom: 0;
+}
+
+.chatInput {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #3D8D7A;
+  color: white;
+}
+
+.chatInput::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.sendButton {
+  margin-left: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #3D8D7A;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sendButton:hover {
+  background-color: #388e3c;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+  font-family: poppins;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media screen and (max-width: 768px) {
+  .chatMessages, 
+  .botMessage,
+  .userMessage {
+  font-size: 12px;
+  }
+
+  .sendButton,
+  .chatInput {
+  font-size: 12px;
+  }
+}

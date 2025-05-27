@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
+
+.profilePage {
+  padding-top: 80px;
+  min-height: 100vh;
+  background-image: url(/background.jpg);
+  background-size: cover;
+  background-position: center;
+  font-family: poppins;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  gap: 2rem;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: rgba(0, 150, 136, 0.3);
+  padding: 1.5rem;
+  border-radius: 12px;
+  height: fit-content;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1.2rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sidebar li:hover {
+  color: #b1d9aa;
+}
+
+.logoutButton {
+  color: red;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.logoutButton:hover {
+  color: #b30000;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+}
+
+.menuList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  color: white;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+
+.main {
+  flex: 1;
+  background-color: rgba(0, 150, 136, 0.3);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.profileHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ddd;
+}
+
+.profileName {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profileLocation {
+  color: #e0e0e0;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: rgba(0, 150, 136, 0.85);
+  color: white;
+  font-size: 1rem;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.fullWidth textarea {
+  grid-column: 1 / -1;
+  font-family: poppins;
+}
+
+.buttonRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  grid-column: 1 / -1;
+}
+
+.saveBtn,
+.resetBtn {
+  padding: 1rem;
+  background-color: #368e7a;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.saveBtn:hover,
+.resetBtn:hover {
+  background-color: #b1d9aa;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: #368e7a;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background: #368e7a;
+  cursor: not-allowed;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.sectionDescription {
+  text-align: center;
+  padding-top: 12px;
+}
+
+.predictionList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.predictionCard {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.predictionCard:hover {
+  transform: scale(1.02);
+}
+
+.predictionCard h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.predictionCard p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.deleteBtn {
+  margin-top: 8px;
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background: #c0392b;
+}
+
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .main {
+    padding: 1.5rem;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pagination span {
+  font-size: 12px;
+} 
+
+
+
+.pagination button {
+  padding: 0.5rem 0.5rem;
+  font-size: 9px;
+}
+
+  .predictionCard p {
+  margin: 0.25rem 0;
+  font-size: 12px;
+}
+
+.deleteBtn {
+  margin-top: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 12px;
+}
+
+}

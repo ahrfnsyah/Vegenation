@@ -1,0 +1,58 @@
+.floatingContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9997;
+}
+
+.chatbotBox {
+  width: 350px;
+  height: 450px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* penting! */
+}
+
+.chatbotToggle {
+  background-color: #368E7A;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.iconWrapper {
+  position: relative;
+  width: 54px;
+  height: 54px;
+}
+
+.chatbotIcon {
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .chatbotBox {
+    width: 90vw;
+    height: 70vh;
+    border-radius: 12px;
+  }
+
+  .chatbotToggle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+  }
+}

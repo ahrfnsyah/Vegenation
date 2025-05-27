@@ -1,0 +1,148 @@
+.articleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.articleCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 0;
+  text-align: center;
+  flex: 1;
+  height: 250px;
+  width: 380px;
+  overflow: hidden;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.imageFallback {
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+}
+
+.overlayContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  color: white;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.articleTitle {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 0 4px;
+  color: #fff;
+}
+
+.articleDescription {
+  font-size: 10px;
+  margin: 0 0 8px;
+  color: #eee;
+}
+
+.bottomRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.articleDate {
+  font-size: 9px;
+  color: #ccc;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.articleLink {
+  font-size: 10px;
+  background-color: #3D8D7A;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.articleLink:hover {
+  background-color: #388e3c;
+}
+
+.navButtonInline {
+  background-color: #3D8D7A;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.navButtonInline:hover {
+  background-color: #388e3c;
+}
+
+@media (max-width: 768px) {
+  .articleContainer {
+    flex-direction: column;
+  }
+
+  .sideButton {
+    display: none;
+  }
+
+  .bottomButtons {
+    display: flex;
+  }
+
+  .articleCard {
+    width: 90%;
+    height: 350px; /* tinggi tetap agar gambar muncul */
+    margin: auto;
+  }
+
+  .imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 180px; /* ketinggian gambar harus tetap */
+  border-radius: 8px;
+  overflow: hidden;
+}
+ 
+ .articleTitle {
+ font-size: 10px;
+ }
+ .articleDescription {
+  font-size: 8px;
+ }
+ .articleDate {
+  font-size: 8px;
+ }
+ 
+ .navButtonInline {
+  font-size: 8px;
+ }
+}

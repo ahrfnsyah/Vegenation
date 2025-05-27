@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 80px; /* Tambahkan tinggi eksplisit */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoText {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+  color: white;
+}
+
+.links a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 8px 4px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: white;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.links a:hover {
+  color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* Desktop & Umum */
+.profileContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.profileImage {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  width: max-content;
+}
+
+.dropdownMenu button {
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background 0.3s;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: poppins;
+}
+
+.dropdownMenu button:hover {
+  background-color: #f0f0f0;
+}
+
+.logoutContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.logoutContainer img,
+.logoutContainer svg {
+  width: 28px;
+  height: 28px;
+  transition: filter 0.3s ease;
+}
+
+.logoutContainer:hover img,
+.logoutContainer:hover svg {
+  filter: brightness(0.8);
+}
+
+
+/* Responsive: Saat dropdown di dalam burger menu */
+@media screen and (max-width: 768px) {
+   .navbar {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .logoText {
+    font-size: 1rem;
+  }
+
+  .links a {
+    font-size: 0.95rem;
+    padding: 6px 2px;
+  }
+
+  .burger {
+    font-size: 1.5rem;
+  }
+
+  .dropdownMenu button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+   .links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0px;
+    background-color: #2e7d32;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1rem 2rem;
+    display: none;
+    text-align: left;
+  }
+
+  .links > * {
+    border-bottom: 1px solid #ccc; /* hanya garis bawah */
+    padding: 0.5rem;
+  }
+
+  .showMenu {
+    display: flex;
+  }
+
+  .burger {
+    display: block;
+  }
+
+ .profileContainer {
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0.5rem 0;
+  }
+
+  .dropdownMenu {
+    position: relative; /* <--- ubah dari absolute ke relative */
+    top: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: none;
+    width: 100%;
+    min-width: unset;
+  }
+
+  
+}
+
