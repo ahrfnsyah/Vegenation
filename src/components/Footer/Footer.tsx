@@ -40,7 +40,7 @@ export default function Footer() {
           <ul>
             <li>Research papers</li>
             <li>AI ethics guidelines</li>
-            <li>Toolkits & libraries</li>
+            <li>Toolkits and libraries</li>
           </ul>
         </div>
 
