@@ -69,8 +69,9 @@
   padding: 0.6rem 1.2rem;
   background-color: #3D8D7A;
   color: white;
-  border-style: groove;
+  border-style: solid;
   border-radius: 8px;
+  border-color: white;
   font-weight: bold;
   cursor: pointer;
   font-family: poppins;
