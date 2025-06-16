@@ -1,14 +1,14 @@
 // index.tsx
-import Navbar from '@/components/Navbar/Navbar';
-import Footer from '@/components/Footer/Footer';
-import styles from '@/styles/Home.module.css';
-import Link from 'next/link';
-import Image from 'next/image';
-import FloatingChatbot from '@/components/Chatbot/FloatingChatbot';
-import TeamModal from '@/components/Team/TeamModal';
-import { FaChartLine, FaNewspaper, FaRobot, FaChartBar } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
+import styles from "@/styles/Home.module.css";
+import Link from "next/link";
+import Image from "next/image";
+import FloatingChatbot from "@/components/Chatbot/FloatingChatbot";
+import TeamModal from "@/components/Team/TeamModal";
+import { FaChartLine, FaNewspaper, FaRobot, FaChartBar } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import Slider from "react-slick";
 
 interface Article {
   date: string;
@@ -24,13 +24,11 @@ export default function Home() {
   const [showDemo, setShowDemo] = useState(false);
   const [showTeam, setShowTeam] = useState(false);
 
-
-
   useEffect(() => {
-    fetch('https://pblpnj.lokatani.id/vegenation/get_articles') // Ganti URL dengan API kamu
-      .then(res => res.json())
-      .then(data => setArticles(data.results))
-      .catch(err => console.error(err));
+    fetch("https://pblpnj.lokatani.id/vegenation/get_articles") // Ganti URL dengan API kamu
+      .then((res) => res.json())
+      .then((data) => setArticles(data.results))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -50,11 +48,14 @@ export default function Home() {
           </div>
 
           <div className={styles.heroText}>
-            <span className={styles.badge}>Prediksi Harga, Tanam Keputusan yang Lebih Pasti</span>
+            <span className={styles.badge}>
+              Prediksi Harga, Tanam Keputusan yang Lebih Pasti
+            </span>
             <h1 className={styles.title}>Vegenation</h1>
             <p className={styles.description}>
-              Vegenation hadir untuk membantu Anda memetakan tren harga komoditas sayuran secara real-time, akurat,
-              dan berbasis data, agar bisnis agrikultur Anda makin cerdas dan tahan fluktuasi.
+              Vegenation hadir untuk membantu Anda memetakan tren harga
+              komoditas sayuran secara real-time, akurat, dan berbasis data,
+              agar bisnis agrikultur Anda makin cerdas dan tahan fluktuasi.
             </p>
 
             <div className={styles.buttonGroup}>
@@ -94,10 +95,12 @@ export default function Home() {
         </section>
 
         {/* Fitur Unggulan Section */}
-        <section className={styles.featuresSection}>
+        <section id="feature" className={styles.featuresSection}>
           <div className={styles.container}>
             <h2 className={styles.sectionTitle}>Fitur Unggulan Vegenation</h2>
-            <p className={styles.sectionSubtitle}>Solusi lengkap untuk manajemen komoditas pertanian Anda</p>
+            <p className={styles.sectionSubtitle}>
+              Solusi lengkap untuk manajemen komoditas pertanian Anda
+            </p>
 
             <div className={styles.featuresGrid}>
               {/* Fitur 1 */}
@@ -106,7 +109,10 @@ export default function Home() {
                   <FaChartLine />
                 </div>
                 <h3>Prediksi Harga</h3>
-                <p>Dapatkan prediksi harga komoditas sayuran berbasis AI untuk membantu perencanaan bisnis Anda.</p>
+                <p>
+                  Dapatkan prediksi harga komoditas sayuran berbasis AI untuk
+                  membantu perencanaan bisnis Anda.
+                </p>
               </div>
 
               {/* Fitur 2 */}
@@ -115,7 +121,10 @@ export default function Home() {
                   <FaNewspaper />
                 </div>
                 <h3>Artikel Komoditas</h3>
-                <p>Informasi terupdate tentang tren pasar, tips budidaya, dan perkembangan terbaru di industri.</p>
+                <p>
+                  Informasi terupdate tentang tren pasar, tips budidaya, dan
+                  perkembangan terbaru di industri.
+                </p>
               </div>
 
               {/* Fitur 3 */}
@@ -124,7 +133,10 @@ export default function Home() {
                   <FaRobot />
                 </div>
                 <h3>Chatbot Interaktif</h3>
-                <p>Tanya jawab seputar pertanian dengan AI kami yang siap membantu 24/7.</p>
+                <p>
+                  Tanya jawab seputar pertanian dengan AI kami yang siap
+                  membantu 24/7.
+                </p>
               </div>
 
               {/* Fitur 4 */}
@@ -133,7 +145,10 @@ export default function Home() {
                   <FaChartBar />
                 </div>
                 <h3>Visualisasi Data</h3>
-                <p>Grafik dan dashboard interaktif untuk analisis tren harga yang mudah dipahami.</p>
+                <p>
+                  Grafik dan dashboard interaktif untuk analisis tren harga yang
+                  mudah dipahami.
+                </p>
               </div>
             </div>
           </div>
@@ -143,7 +158,9 @@ export default function Home() {
         <section id="articles" className={styles.articleSection}>
           <div className={styles.container}>
             <h2 className={styles.sectionTitle}>Artikel Terkini</h2>
-            <p className={styles.sectionSubtitle}>Update berita dan informasi penting dunia pertanian</p>
+            <p className={styles.sectionSubtitle}>
+              Update berita dan informasi penting dunia pertanian
+            </p>
 
             <Slider
               dots={true}
@@ -157,20 +174,25 @@ export default function Home() {
               responsive={[
                 {
                   breakpoint: 1024,
-                  settings: { slidesToShow: 2 }
+                  settings: { slidesToShow: 2 },
                 },
                 {
                   breakpoint: 640,
                   settings: {
                     slidesToShow: 1,
-                    dotsClass: `slick-dots ${styles.mobileDots}`
-                  }
-                }
+                    dotsClass: `slick-dots ${styles.mobileDots}`,
+                  },
+                },
               ]}
             >
               {articles.map((article, index) => (
                 <div key={index} className={styles.articleCardWrapper}>
-                  <a href={article.link} target="_blank" rel="noopener noreferrer" className={styles.articleCard}>
+                  <a
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.articleCard}
+                  >
                     <Image
                       src={article.img_url}
                       alt={article.title}
@@ -181,41 +203,54 @@ export default function Home() {
                     />
                     <div className={styles.articleContent}>
                       <h3 className={styles.articleTitle}>{article.title}</h3>
-                      <p className={styles.articleDescription}>{article.description}</p>
+                      <p className={styles.articleDescription}>
+                        {article.description}
+                      </p>
                       <span className={styles.articleDate}>{article.date}</span>
                     </div>
                   </a>
                 </div>
               ))}
             </Slider>
-
           </div>
         </section>
 
         {/* About Section */}
         <section id="about" className={styles.aboutSection}>
-          <span className={styles.tagline}>Teknologi untuk Pertanian Berkelanjutan</span>
+          <span className={styles.tagline}>
+            Teknologi untuk Pertanian Berkelanjutan
+          </span>
           <h2 className={styles.sectionTitle}>Tentang Vegenation</h2>
 
           <div className={styles.aboutGrid}>
             <p className={styles.aboutText}>
-              <strong>VegeNation</strong> merupakan platform digital yang dirancang untuk membantu petani, pedagang, dan pelaku agrikultur
-              dalam memantau serta memprediksi harga komoditas sayuran secara <em>real-time</em>.
-              Didukung oleh teknologi <strong><em>machine learning</em> (LSTM dengan mekanisme <em>attention</em>)</strong>,
-              VegeNation menyajikan prediksi harga yang akurat, disertai dengan dashboard interaktif,
-              artikel pasar terkini, dan chatbot AI untuk memberikan wawasan serta dukungan berbasis data.
+              <strong>VegeNation</strong> merupakan platform digital yang
+              dirancang untuk membantu petani, pedagang, dan pelaku agrikultur
+              dalam memantau serta memprediksi harga komoditas sayuran secara{" "}
+              <em>real-time</em>. Didukung oleh teknologi{" "}
+              <strong>
+                <em>machine learning</em> (LSTM dengan mekanisme{" "}
+                <em>attention</em>)
+              </strong>
+              , VegeNation menyajikan prediksi harga yang akurat, disertai
+              dengan dashboard interaktif, artikel pasar terkini, dan chatbot AI
+              untuk memberikan wawasan serta dukungan berbasis data.
             </p>
 
             <p className={styles.aboutText}>
-              Platform ini dibangun berdasarkan riset kebutuhan pengguna dan berfokus pada pemberdayaan pertanian lokal
-              melalui pendekatan teknologi yang adaptif dan ramah pengguna.
-              VegeNation hadir sebagai bagian dari solusi menuju sistem prediksi harga pangan yang lebih
+              Platform ini dibangun berdasarkan riset kebutuhan pengguna dan
+              berfokus pada pemberdayaan pertanian lokal melalui pendekatan
+              teknologi yang adaptif dan ramah pengguna. VegeNation hadir
+              sebagai bagian dari solusi menuju sistem prediksi harga pangan
+              yang lebih
               <em> cerdas, berkelanjutan, dan berkeadilan</em>.
             </p>
-
           </div>
           <TeamModal show={showTeam} onClose={() => setShowTeam(false)} />
-          <button onClick={() => setShowTeam(true)} className={styles.teamButton}>
+          <button
+            onClick={() => setShowTeam(true)}
+            className={styles.teamButton}
+          >
             Tim Pengembang →
           </button>
         </section>

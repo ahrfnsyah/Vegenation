@@ -1,25 +1,26 @@
 // pages/login.tsx
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { loginUser } from '@/lib/auth';
-import Navbar from '@/components/Navbar/Navbar';
-import Image from 'next/image';
-import styles from '@/styles/login.module.css';
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { loginUser } from "@/lib/auth";
+import Navbar from "@/components/Navbar/Navbar";
+import Image from "next/image";
+import styles from "@/styles/login.module.css";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (username === 'admin' && password === 'admin123') {
-      loginUser('secureToken123');
-      router.push('/dashboard');
+    if (username === "admin" && password === "admin123") {
+      loginUser("secureToken123");
+      router.push("/dashboard");
     } else {
-      alert('Username atau password salah');
+      alert("Username atau password salah");
     }
   };
 
@@ -54,7 +55,7 @@ export default function LoginPage() {
                 required
               />
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -66,23 +67,28 @@ export default function LoginPage() {
                   <input
                     type="checkbox"
                     onChange={(e) => setShowPassword(e.target.checked)}
-                  />{' '}
-                  Show my password
+                  />{" "}
+                  Perlihatkan password
                 </label>
                 <a
                   href="#"
                   className={styles.forgot}
                   onClick={(e) => {
                     e.preventDefault();
-                    alert('Silakan hubungi developer untuk mengetahui account Anda.');
+                    alert(
+                      "Silakan hubungi developer untuk mengetahui account Anda."
+                    );
                   }}
                 >
-                  Forgot Password?
+                  Lupa Password?
                 </a>
               </div>
               <button type="submit" className={styles.button}>
                 Log in
               </button>
+              <Link href="/dashboard" className={styles.buttonSecondary}>
+                Login as a Guest
+              </Link>
             </form>
           </div>
         </div>

@@ -1,26 +1,63 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from '@/components/Chatbot/chatbot.module.css';
-import { sendChatMessage } from '@/lib/api';
-import Image from 'next/image';
+import React, { useEffect, useRef, useState } from "react";
+import styles from "@/components/Chatbot/chatbot.module.css";
+import { sendChatMessage } from "@/lib/api";
+import Image from "next/image";
 
 const ChatBot: React.FC = () => {
-  const [chatHistory, setChatHistory] = useState<{ type: 'user' | 'bot'; message: string }[]>([
+  const [chatHistory, setChatHistory] = useState<
+    { type: "user" | "bot"; message: string }[]
+  >([
     {
-      type: 'bot',
-      message: 'Hai! Saya Vegebot, siap memberikan prediksi harga sayur untuk Anda. Sayur apa yang ingin Anda ketahui harganya?'
-    }
+      type: "bot",
+      message:
+        "Hai! Saya Vegebot, siap memberikan prediksi harga komoditas sayuran (cabai, bawang merah, dan bawang putih) untuk Anda. Komoditas mana yang ingin Anda ketahui harganya?",
+    },
   ]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [typingDots, setTypingDots] = useState('');
+  const [typingDots, setTypingDots] = useState("");
   const [emptyError, setEmptyError] = useState(false);
   const [userHasAsked, setUserHasAsked] = useState(false);
   const [shouldScroll, setShouldScroll] = useState(true);
+  // NEW: State to store the quick suggestions
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-  // ✅ Pindahkan handleScroll ke luar
+  // NEW: useEffect to generate suggestions on component mount
+  useEffect(() => {
+    const generateSuggestions = () => {
+      const commodities = ["cabai", "bawang merah", "bawang putih"];
+      const units = ["hari", "minggu", "bulan"];
+      const newSuggestions = new Set<string>(); // Use a Set to prevent duplicate suggestions
+
+      while (newSuggestions.size < 3) {
+        const commodity =
+          commodities[Math.floor(Math.random() * commodities.length)];
+        const unit = units[Math.floor(Math.random() * units.length)];
+        let num;
+
+        // Determine a random number based on the time unit
+        if (unit === "hari") {
+          num = Math.floor(Math.random() * 7) + 1; // e.g., 1-7 days
+        } else if (unit === "minggu") {
+          num = Math.floor(Math.random() * 4) + 1; // e.g., 1-4 weeks
+        } else {
+          num = Math.floor(Math.random() * 3) + 1; // e.g., 1-3 months
+        }
+
+        // Format the suggestion string
+        newSuggestions.add(
+          `Prediksi harga ${commodity} untuk ${num} ${unit} kedepan`
+        );
+      }
+      setSuggestions(Array.from(newSuggestions));
+    };
+
+    generateSuggestions();
+  }, []);
+
   const handleScroll = () => {
     if (!chatContainerRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
@@ -28,73 +65,85 @@ const ChatBot: React.FC = () => {
     setShouldScroll(isAtBottom);
   };
 
-  const handleSendMessage = async () => {
-    if (inputMessage.trim() === '') {
+  // MODIFIED: handleSendMessage now accepts an optional message argument
+  const handleSendMessage = async (messageText?: string) => {
+    const userMessage = (messageText || inputMessage).trim();
+    if (userMessage === "") {
       setEmptyError(true);
       setTimeout(() => setEmptyError(false), 2000);
       return;
     }
 
     setEmptyError(false);
-    setUserHasAsked(true);
+    setUserHasAsked(true); // Hide suggestions after the first message
 
-    const userMessage = inputMessage.trim();
-    setChatHistory(prev => [...prev, { type: 'user', message: userMessage }]);
-    setInputMessage('');
+    setChatHistory((prev) => [...prev, { type: "user", message: userMessage }]);
+    setInputMessage("");
     setLoading(true);
-    setTypingDots('.');
-
-    // Placeholder pesan bot kosong
-    setChatHistory(prev => [...prev, { type: 'bot', message: '' }]);
+    setTypingDots(".");
+    setChatHistory((prev) => [...prev, { type: "bot", message: "" }]);
 
     const dotsInterval = setInterval(() => {
-      setTypingDots(prev => (prev.length >= 3 ? '.' : prev + '.'));
+      setTypingDots((prev) => (prev.length >= 3 ? "." : prev + "."));
     }, 500);
-
 
     try {
       const data = await sendChatMessage(userMessage);
 
       const formatResponse = (response: string): string => {
         return response
-          .split('\n')
-          .map(line => {
+          .split("\n")
+          .map((line) => {
             const match = line.match(/^(\d{1,2} \w+ \d{4}): Rp([\d.,]+)/);
             if (match) {
               return `${match[1]}: Rp${match[2]}/kg`;
             }
             return line;
           })
-          .join('\n');
+          .join("\n");
       };
 
       setTimeout(() => {
         clearInterval(dotsInterval);
-        setTypingDots('');
-        setChatHistory(prev => {
+        setTypingDots("");
+        setChatHistory((prev) => {
           const updated = [...prev];
-          const formattedMessage = formatResponse(data.response || 'Tidak ada jawaban.');
-          updated[updated.length - 1] = { type: 'bot', message: formattedMessage };
+          const formattedMessage = formatResponse(
+            data.response || "Tidak ada jawaban."
+          );
+          updated[updated.length - 1] = {
+            type: "bot",
+            message: formattedMessage,
+          };
           return updated;
         });
         setLoading(false);
       }, 2000);
     } catch (error) {
       clearInterval(dotsInterval);
-      setTypingDots('');
-      setChatHistory(prev => {
+      setTypingDots("");
+      setChatHistory((prev) => {
         const updated = [...prev];
-        updated[updated.length - 1] = { type: 'bot', message: 'Maaf, terjadi kesalahan.' };
+        updated[updated.length - 1] = {
+          type: "bot",
+          message: "Maaf, terjadi kesalahan.",
+        };
         return updated;
       });
       setLoading(false);
-      console.error('Chatbot error:', error);
+      console.error("Chatbot error:", error);
     }
+  };
+
+  // NEW: Handler for when a suggestion button is clicked
+  const handleSuggestionClick = (suggestion: string) => {
+    if (loading) return;
+    handleSendMessage(suggestion);
   };
 
   useEffect(() => {
     if (shouldScroll) {
-      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [chatHistory, typingDots, shouldScroll]);
 
@@ -109,9 +158,13 @@ const ChatBot: React.FC = () => {
         {chatHistory.map((chat, i) => (
           <div
             key={i}
-            className={chat.type === 'user' ? styles.userMessageWrapper : styles.botMessageWrapper}
+            className={
+              chat.type === "user"
+                ? styles.userMessageWrapper
+                : styles.botMessageWrapper
+            }
           >
-            {chat.type === 'bot' && (
+            {chat.type === "bot" && (
               <Image
                 src="/icons/imas5.png"
                 alt="Vegebot"
@@ -121,13 +174,29 @@ const ChatBot: React.FC = () => {
               />
             )}
             <div
-              className={chat.type === 'user' ? styles.userMessage : styles.botMessage}
+              className={
+                chat.type === "user" ? styles.userMessage : styles.botMessage
+              }
             >
-              {chat.message || (loading && i === chatHistory.length - 1 ? typingDots : '')}
+              {chat.message ||
+                (loading && i === chatHistory.length - 1 ? typingDots : "")}
             </div>
           </div>
         ))}
         <div ref={chatEndRef} />
+      </div>
+
+      <div className={styles.suggestionsArea}>
+        {suggestions.map((text, index) => (
+          <button
+            key={index}
+            className={styles.suggestionButton}
+            onClick={() => handleSuggestionClick(text)}
+            disabled={loading}
+          >
+            {text}
+          </button>
+        ))}
       </div>
 
       <div className={styles.chatInputArea}>
@@ -137,20 +206,22 @@ const ChatBot: React.FC = () => {
           placeholder="Tulis pertanyaan..."
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+          onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           disabled={loading}
         />
         <button
-          onClick={handleSendMessage}
+          onClick={() => handleSendMessage()}
           className={styles.sendButton}
           disabled={loading}
         >
-          {loading ? '...' : 'Kirim'}
+          {loading ? "..." : "Kirim"}
         </button>
       </div>
 
       {emptyError && (
-        <div className={styles.errorMessage}>Silakan tulis pertanyaan terlebih dahulu</div>
+        <div className={styles.errorMessage}>
+          Silakan tulis pertanyaan terlebih dahulu
+        </div>
       )}
     </div>
   );
